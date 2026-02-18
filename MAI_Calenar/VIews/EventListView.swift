@@ -9,7 +9,7 @@ import EventKit
 import SwiftUI
 
 struct EventListView: View {
-    @Bindable var calendarManager: CalendarManager
+    @Environment(CalendarManager.self) var calendarManager
     var body: some View {
         List {
             if !calendarManager.events.isEmpty {
@@ -26,7 +26,7 @@ struct EventListView: View {
                         systemImage: "calendar.badge.minus"
                     )
                 } description: {
-                    Text("Пары за следющие 30 дней пояятся здесь")
+                    Text("Пары за следющие 7 дней пояятся здесь")
                 }
             }
         }
@@ -37,5 +37,5 @@ struct EventListView: View {
 }
 
 #Preview {
-    EventListView(calendarManager: CalendarManager())
+    EventListView()
 }

@@ -9,7 +9,7 @@ import EventKit
 import SwiftUI
 
 struct PermissionView: View {
-    @Bindable var calendarManager: CalendarManager
+    @Environment(CalendarManager.self) var calendarManager
     var body: some View {
         ContentUnavailableView {
             Label(
@@ -24,9 +24,7 @@ struct PermissionView: View {
             if calendarManager.authorizationSatatus == .notDetermined {
                 Button("Дать доступ к календарю") {
                     Task {
-                        print(calendarManager.authorizationSatatus.rawValue)
                         await calendarManager.requestAccess()
-                        print(calendarManager.authorizationSatatus.rawValue)
                     }
                 }
             } else {
@@ -43,5 +41,5 @@ struct PermissionView: View {
 }
 
 #Preview {
-    PermissionView(calendarManager: CalendarManager())
+    PermissionView()
 }

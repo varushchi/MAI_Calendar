@@ -15,9 +15,9 @@ struct MainListView: View {
         NavigationStack {
             Group {
                 if calendarManager.authorizationSatatus == .fullAccess {
-                    EventListView(calendarManager: calendarManager)
+                    EventListView()
                 } else {
-                    PermissionView(calendarManager: calendarManager)
+                    PermissionView()
                 }
             }
             .navigationTitle("События")
@@ -26,7 +26,7 @@ struct MainListView: View {
                     ToolbarItem(placement: .topBarTrailing) {
                         Menu {
                             NavigationLink {
-                                NewCustomEventView()
+                                NewCustomTemplateView()
                             } label: {
                                 Text("Создать новую пару")
                             }
@@ -51,6 +51,7 @@ struct MainListView: View {
                 calendarManager.fetchEvents()
             }
         }
+        .environment(calendarManager)
     }
 }
 

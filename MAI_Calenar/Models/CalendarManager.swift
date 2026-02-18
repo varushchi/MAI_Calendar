@@ -41,7 +41,7 @@ final class CalendarManager {
         guard
             let endDate = Calendar.current.date(
                 byAdding: .day,
-                value: 30,
+                value: 7,
                 to: startDate
             )
         else { return }
