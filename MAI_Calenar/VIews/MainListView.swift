@@ -20,7 +20,7 @@ struct MainListView: View {
                     PermissionView()
                 }
             }
-            .navigationTitle("События")
+            .navigationTitle("Расписание")
             .toolbar {
                 if calendarManager.authorizationSatatus == .fullAccess {
                     ToolbarItem(placement: .topBarTrailing) {

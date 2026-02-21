@@ -120,4 +120,11 @@ final class NewCustomTemplateViewModel {
         lessonTemplate.building = ""
         lessonTemplate.room = ""
     }
+    
+    var isFormValid: Bool {
+        if lessonTemplate.title.trimmingCharacters(in: .whitespaces).isEmpty {
+            return false
+        }
+        return true
+    }
 }

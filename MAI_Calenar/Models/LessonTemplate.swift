@@ -57,8 +57,8 @@ struct LessonTemplate: Identifiable {
     var title: String = ""
     var teacher: String = ""
 
-    var startDate: Date = Calendar.current.startOfDay(for: Date())
-    var endDate: Date = Calendar.current.startOfDay(for: Date())
+    var startDate: Date = Calendar.current.date(bySettingHour: 8, minute: 0, second: 0, of: Date())!
+    var endDate: Date = Calendar.current.date(bySettingHour: 8, minute: 0, second: 0, of: Date())!.addingTimeInterval(5400)
     var repeating: Repeating = .onceAWeek
     var dayOfWeek: DayOfWeek = .monday
 
@@ -87,8 +87,14 @@ struct LessonTemplate: Identifiable {
     var building: String = ""
     var room: String = ""
 
-    var notes: String {
-        "\(teacher): \(building)-\(room)"
+    var notes: String? {
+        let teacher = self.teacher.trimmingCharacters(in: .whitespaces)
+        let building = self.building.trimmingCharacters(in: .whitespaces)
+        let room = self.room.trimmingCharacters(in: .whitespaces)
+        if teacher.isEmpty && building.isEmpty && room.isEmpty {
+            return nil
+        }
+        return "\(teacher): \(building)-\(room)"
     }
 
     static let semester = Semester()
@@ -197,6 +203,8 @@ struct LessonTemplate: Identifiable {
         case .custom(let dates):
             for date in dates {
                 let (startDate, endDate) = convertDateToRightFormat(date)
+                print(startDate)
+                print(endDate)
                 let _ = calendarManager.createEvent(
                     title: self.title,
                     startDate: startDate,
